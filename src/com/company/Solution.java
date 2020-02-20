@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
     public List<Book> books;
@@ -31,7 +28,7 @@ public class Solution {
             int signupProcess = scanner.nextInt();
             int shipPerDay = scanner.nextInt();
 
-            Library library = new Library(i, new HashMap<Integer, Book>(), signupProcess, shipPerDay);
+            Library library = new Library(i, new ArrayList<>(), signupProcess, shipPerDay);
 
             for (int j = 0; j < libraryBooks; j++) {
                 int bookId = scanner.nextInt();
@@ -39,11 +36,23 @@ public class Solution {
                 books.get(bookId).addLibrary(library); // add library book belongs to
             }
 
+            library.computeValue(); // compute value and total score
             libraries.add(library);
         }
+        Collections.sort(libraries);
+        printValues(libraries);
+    }
 
-        System.out.println(libraries);
-        System.out.println(books);
+    public static void printValues(List<Library> libraries) {
+        for (Library library : libraries) {
+            System.out.println("Library " + library.id + " : " + library.totalScore);
+        }
+    }
+
+    public static void printBooks(List<Book> books) {
+        for (Book book : books) {
+            System.out.println(book.toString());
+        }
     }
 
     public String getAnswer(List<LibraryAnswer> answers) {
