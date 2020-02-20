@@ -32,6 +32,9 @@ public class Main {
 
             // TODO: Replace hashset with book set/list
             Library library = new Library(i, new HashSet<Integer>(), signupProcess, shipPerDay);
+            libraries.add(library);
         }
+
+        System.out.println(libraries);
     }
 }
