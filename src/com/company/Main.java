@@ -30,6 +30,10 @@ public class Main {
             for (int j = 0; j < libraryBooks; j++) {
                 library.addBook(books.get(scanner.nextInt()));
             }
+
+            libraries.add(library);
         }
+
+        System.out.println(libraries);
     }
 }
