@@ -4,21 +4,25 @@ import java.util.*;
 
 public class Main {
 
+    public static int bookCount, libraryCount, dayCount;
+    public static ArrayList<Book> books;
+    public static ArrayList<Library> libraries;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Get counts
-        int bookCount = scanner.nextInt();
-        int libraryCount = scanner.nextInt();
-        int dayCount = scanner.nextInt();
+        bookCount = scanner.nextInt();
+        libraryCount = scanner.nextInt();
+        dayCount = scanner.nextInt();
         
-        HashMap<Integer, Book> books = new HashMap<>();
+        books = new ArrayList<>();
 
         for (int i = 0; i < bookCount; i++) {
-            books.put(i, new Book(i, scanner.nextInt(), null));
+            books.add(new Book(i, scanner.nextInt(), null));
         }
 
-        List<Library> libraries = new ArrayList<Library>();
+        libraries = new ArrayList<Library>();
 
         for (int i = 0; i < libraryCount; ++i) {
             int libraryBooks = scanner.nextInt();
@@ -37,5 +41,18 @@ public class Main {
 
         System.out.println(libraries);
         System.out.println(books);
+
+        solve();
     }
+
+    public static void solve(){
+        Collections.sort(libraries)
+
+
+    }
+
+    public static int getAdditionalVal(Library lib){
+        for ()
+    }
+
 }
