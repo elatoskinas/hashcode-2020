@@ -12,13 +12,13 @@ public class Main {
         int libraryCount = scanner.nextInt();
         int dayCount = scanner.nextInt();
         
-        HashMap<Integer, Book> books = new HashMap<>();
+        ArrayList<Book> books = new ArrayList<>();
 
         for (int i = 0; i < bookCount; i++) {
-            books.put(i, new Book(i, scanner.nextInt(), null));
+            books.add(new Book(i, scanner.nextInt(), null));
         }
 
-        List<Library> libraries = new ArrayList<Library>();
+        List<Library> libraries = new ArrayList<>();
 
         for (int i = 0; i < libraryCount; ++i) {
             int libraryBooks = scanner.nextInt();
@@ -29,7 +29,8 @@ public class Main {
 
             for (int j = 0; j < libraryBooks; j++) {
                 int bookId = scanner.nextInt();
-                library.addBook(books.get(bookId));
+                library.addBook(books.get(bookId)); // add book to current library
+                books.get(bookId).addLibrary(library); // add library book belongs to
             }
 
             libraries.add(library);

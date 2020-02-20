@@ -1,14 +1,16 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Book {
     public int id;
     public int score;
-    public Library library;
+    public ArrayList<Library> libraries;
 
-    public Book(int id, int score, Library library) {
+    public Book(int id, int score, ArrayList<Library> libraries) {
         this.id = id;
         this.score = score;
-        this.library = library;
+        this.libraries = libraries;
     }
 
     public int getId() {
@@ -27,12 +29,12 @@ public class Book {
         this.score = score;
     }
 
-    public Library getLibrary() {
-        return library;
+    public ArrayList<Library> getLibraries() {
+        return this.libraries;
     }
 
-    public void setLibrary(Library library) {
-        this.library = library;
+    public void setLibraries(ArrayList<Library> libraries) {
+        this.libraries = libraries;
     }
 
     public String toString() {
@@ -45,5 +47,9 @@ public class Book {
 
 
         return builder.toString();
+    }
+
+    public void addLibrary(Library library) {
+        this.libraries.add(library);
     }
 }
