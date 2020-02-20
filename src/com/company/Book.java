@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Book {
+public class Book  implements Comparable<Book>{
     public int id;
     public int score;
     public ArrayList<Library> libraries;
@@ -51,5 +51,10 @@ public class Book {
 
     public void addLibrary(Library library) {
         this.libraries.add(library);
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return  o.score - this.score;
     }
 }

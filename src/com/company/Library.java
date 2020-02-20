@@ -1,15 +1,20 @@
 package com.company;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 public class Library implements Comparable<Library>{
     public int id;
-    private HashMap<Integer, Book> bookIds;
-    private int signupTime;
-    private int shipPerDay;
+    public List<Book> bookIds;
+    public int signupTime;
+    public int shipPerDay;
 
-    public Library(int id, HashMap<Integer, Book> bookIds, int signupTime, int shipPerDay){
+    public int addVal;
+    public int totalsum;
+
+
+    public Library(int id, List<Book> bookIds, int signupTime, int shipPerDay){
         this.id = id;
         this.bookIds = bookIds;
         this.signupTime = signupTime;
@@ -30,13 +35,15 @@ public class Library implements Comparable<Library>{
 
     public void addBook(Book book) {
         int bookId = book.getId();
-        this.bookIds.put(bookId, book);
+        this.bookIds.add(book);
     }
 
     @Override
     public int compareTo(Library o) {
-        this.shipPerDay/this.signupTime < o.shipPerDay*additionalVal(o)/o.signupTime;
+        return o.shipPerDay*o.addVal/o.signupTime - this.shipPerDay*addVal/this.signupTime;
     }
+
+
 
 
 }
