@@ -34,8 +34,5 @@ public class Main {
 
             libraries.add(library);
         }
-
-        System.out.println(libraries);
-        System.out.println(books);
     }
 }
