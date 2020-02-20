@@ -7,10 +7,10 @@ public class Book {
     public int score;
     public ArrayList<Library> libraries;
 
-    public Book(int id, int score, ArrayList<Library> libraries) {
+    public Book(int id, int score) {
         this.id = id;
         this.score = score;
-        this.libraries = libraries;
+        this.libraries = new ArrayList<>();
     }
 
     public int getId() {
