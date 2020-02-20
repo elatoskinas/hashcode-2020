@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class Library {
     public int id;
@@ -12,6 +9,7 @@ public class Library {
     public int shipPerDay;
 
     private PriorityQueue<Book> queuedBooks;
+    public List<Book> booksToScan;
 
     public Library(int id, HashMap<Integer, Book> bookIds, int signupTime, int shipPerDay) {
         this.id = id;
@@ -26,6 +24,8 @@ public class Library {
                 return Integer.compare(o2.score, o1.score);
             }
         });
+
+        this.booksToScan = new ArrayList<>();
     }
 
     public String toString() {
@@ -44,5 +44,17 @@ public class Library {
         //int bookId = book.getId();
         //this.bookIds.put(bookId, book);
         this.queuedBooks.add(book);
+    }
+
+    public void addScanBook(Book book) {
+        this.booksToScan.add(book);
+    }
+
+    public Book getNext() {
+        return queuedBooks.poll();
+    }
+
+    public boolean hasBook() {
+        return !queuedBooks.isEmpty();
     }
 }
