@@ -144,6 +144,7 @@ public class Solution {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
             writer.write(result.toString());
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
