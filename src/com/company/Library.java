@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Library implements Comparable<Library>{
-    private int id;
+    public int id;
     private HashMap<Integer, Book> bookIds;
     private int signupTime;
     private int shipPerDay;
