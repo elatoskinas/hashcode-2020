@@ -15,7 +15,7 @@ public class Main {
         ArrayList<Book> books = new ArrayList<>();
 
         for (int i = 0; i < bookCount; i++) {
-            books.add(new Book(i, scanner.nextInt(), null));
+            books.add(new Book(i, scanner.nextInt()));
         }
 
         List<Library> libraries = new ArrayList<>();
