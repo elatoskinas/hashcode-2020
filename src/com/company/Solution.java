@@ -123,28 +123,29 @@ public class Solution {
         for (Library library : result) {
             LibraryAnswer answer = new LibraryAnswer(library.id);
 
-            for (Book b : library.booksToScan) {
-                answer.addBook(b);
-            }
+            if (!library.booksToScan.isEmpty()) {
+                for (Book b : library.booksToScan) {
+                    answer.addBook(b);
+                }
 
-            answers.add(answer);
+                answers.add(answer);
+            }
         }
 
         writeAnswer(answers);
     }
 
     public void writeAnswer(List<LibraryAnswer> answers) {
-        StringBuilder result = new StringBuilder();
-        result.append(answers.size()).append("\n");
-
-        for (LibraryAnswer answer : answers) {
-            result.append(answer.toString()).append("\n");
-        }
-
+        PrintWriter writer = null;
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
-            writer.write(result.toString());
-            writer.close();
+            writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
+            writer.write(answers.size() + "\n");
+
+            for (LibraryAnswer answer : answers) {
+                writer.write(answer.toString() + "\n");
+            }
+
+            writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -17,12 +17,16 @@ public class LibraryAnswer {
     }
 
     public String toString() {
-        StringBuilder result = new StringBuilder(id + " " + books.size() + "\n");
+        if (books.size() != 0) {
+            StringBuilder result = new StringBuilder(id + " " + books.size() + "\n");
 
-        for (int book : books) {
-            result.append(book).append(" ");
+            for (int book : books) {
+                result.append(book).append(" ");
+            }
+
+            return result.toString();
         }
 
-        return result.toString();
+        return "";
     }
 }
