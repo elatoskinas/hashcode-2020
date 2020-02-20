@@ -48,4 +48,8 @@ public class Book {
 
         return builder.toString();
     }
+
+    public void addLibrary(Library library) {
+        this.libraries.add(library);
+    }
 }

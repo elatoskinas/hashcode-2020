@@ -29,7 +29,8 @@ public class Main {
 
             for (int j = 0; j < libraryBooks; j++) {
                 int bookId = scanner.nextInt();
-                library.addBook(books.get(bookId));
+                library.addBook(books.get(bookId)); // add book to current library
+                books.get(bookId).addLibrary(library); // add library book belongs to
             }
 
             libraries.add(library);
