@@ -45,4 +45,16 @@ public class Solution {
         System.out.println(libraries);
         System.out.println(books);
     }
+
+    public String getAnswer(List<LibraryAnswer> answers) {
+        StringBuilder result = new StringBuilder();
+        result.append(answers.size()).append("\n");
+
+        for (LibraryAnswer answer : answers) {
+            result.append(answer.toString()).append("\n");
+        }
+
+        return result.toString();
+    }
+
 }
