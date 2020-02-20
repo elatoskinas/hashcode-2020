@@ -28,12 +28,14 @@ public class Main {
             Library library = new Library(i, new HashMap<Integer, Book>(), signupProcess, shipPerDay);
 
             for (int j = 0; j < libraryBooks; j++) {
-                library.addBook(books.get(scanner.nextInt()));
+                int bookId = scanner.nextInt();
+                library.addBook(books.get(bookId));
             }
 
             libraries.add(library);
         }
 
         System.out.println(libraries);
+        System.out.println(books);
     }
 }

@@ -34,4 +34,16 @@ public class Book {
     public void setLibrary(Library library) {
         this.library = library;
     }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("[Book: ")
+                .append("ID: ").append(id).append(", ")
+                .append("Score: ").append(score)
+                .append("]");
+
+
+        return builder.toString();
+    }
 }

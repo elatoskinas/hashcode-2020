@@ -19,11 +19,11 @@ public class Library {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("[Library:\n")
-                .append("ID: ").append(id).append("\n")
-                .append("Signup Time: ").append(signupTime).append("\n")
-                .append("Ship per day: ").append(shipPerDay).append("\n")
-                .append("]\n");
+        builder.append("[Library: ")
+                .append("ID: ").append(id).append(", ")
+                .append("Signup Time: ").append(signupTime).append(", ")
+                .append("Ship per day: ").append(shipPerDay)
+                .append("]");
 
         return builder.toString();
     }
