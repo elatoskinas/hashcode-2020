@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -14,10 +11,12 @@ public class Main {
         int bookCount = scanner.nextInt();
         int libraryCount = scanner.nextInt();
         int dayCount = scanner.nextInt();
+        
+        HashMap<Integer, Book> books = new HashMap<>();
 
-        // TODO: Scan scores of books
-        // TODO: Remove this next line
-        scanner.nextLine();
+        for (int i = 0; i < bookCount; i++) {
+            books.put(i, new Book(i, scanner.nextInt(), null));
+        }
 
         List<Library> libraries = new ArrayList<Library>();
 
@@ -26,12 +25,12 @@ public class Main {
             int signupProcess = scanner.nextInt();
             int shipPerDay = scanner.nextInt();
 
-            // TODO: Scan books
-            // TODO: Remove this next line
-            scanner.nextLine();
+            Library library = new Library(i, new HashMap<Integer, Book>(), signupProcess, shipPerDay);
 
-            // TODO: Replace hashset with book set/list
-            Library library = new Library(i, new HashSet<Integer>(), signupProcess, shipPerDay);
+            for (int j = 0; j < libraryBooks; j++) {
+                library.addBook(books.get(scanner.nextInt()));
+            }
+
             libraries.add(library);
         }
 
