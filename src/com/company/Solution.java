@@ -1,10 +1,7 @@
 package com.company;
 
+import java.util.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 public class Solution {
     public List<Book> books;
@@ -14,7 +11,7 @@ public class Solution {
 
     public Solution(String filename) {
         File file = new File(filename);
-        this.outputName = filename.substring(0, filename.length() - 3);
+        this.outputName = filename.substring(6, filename.length() - 4);
 
         Scanner scanner = null;
 
@@ -54,6 +51,10 @@ public class Solution {
         }
     }
 
+    public void solve() {
+        // ... (call write answer here)
+    }
+
     public void writeAnswer(List<LibraryAnswer> answers) {
         StringBuilder result = new StringBuilder();
         result.append(answers.size()).append("\n");
@@ -65,13 +66,9 @@ public class Solution {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
             writer.write(result.toString());
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void solve() {
-        // ...
-        // Write here (by writeAnswer)
     }
 }
