@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Solution {
@@ -84,6 +87,7 @@ public class Solution {
         //System.out.println("score " + score);
 
 
+
         //System.out.prinln(solution.size());
         System.out.println(solution.size());
         for (int i = 0;i<solution.size();i++){
@@ -93,6 +97,26 @@ public class Solution {
             System.out.println();
         }
     }
+
+
+    public void writeAnswer(List<LibraryAnswer> answers) {
+        StringBuilder result = new StringBuilder();
+        result.append(answers.size()).append("\n");
+
+        for (LibraryAnswer answer : answers) {
+            result.append(answer.toString()).append("\n");
+        }
+
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
+            writer.write(result.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public int getScore (Library lib, int day){
         Collections.sort(lib.bookIds);
