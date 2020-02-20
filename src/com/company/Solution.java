@@ -4,16 +4,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.*;
+import java.io.*;
 
 public class Solution {
     public List<Book> books;
     public List<Library> libraries;
     public int dayCount;
+    private String outputName;
+
+    public Solution(String filename) {
+        File file = new File(filename);
+        this.outputName = filename.substring(6, filename.length() - 4);
 
     public ArrayList<Integer> solutionBooks;
 
     public Solution() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = null;
+
+        try {
+            scanner = new Scanner(file);
 
         // Get counts
         int bookCount = scanner.nextInt();
@@ -43,7 +53,10 @@ public class Solution {
             }
             library.totalsum = sum;
 
-            libraries.add(library);
+                libraries.add(library);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
         //System.out.println(libraries);
@@ -52,71 +65,74 @@ public class Solution {
     }
 
 
-    public void solve(){
+    public void solve() {
 
-        for (int i=0;i<libraries.size(); i++)
-            libraries.get(i).addVal = libraries.get(i).totalsum;
-        Collections.sort(libraries);
-        //System.out.println(libraries);
+            for (int i = 0; i < libraries.size(); i++)
+                libraries.get(i).addVal = libraries.get(i).totalsum;
+            Collections.sort(libraries);
+            //System.out.println(libraries);
 
-        int day = 0;
-        int score = 0;
+            int day = 0;
+            int score = 0;
 
-        ArrayList<Library> solution = new ArrayList<Library>();
-        ArrayList<ArrayList<Integer>> booksIDD = new ArrayList<>();
-        while (day < dayCount && libraries.size()>0){
-            Library lib = libraries.get(0);
-           // System.out.println("selected library " + lib);
+            ArrayList<Library> solution = new ArrayList<Library>();
+            ArrayList<ArrayList<Integer>> booksIDD = new ArrayList<>();
+            while (day < dayCount && libraries.size() > 0) {
+                Library lib = libraries.get(0);
+                // System.out.println("selected library " + lib);
 
-            day += lib.signupTime;
-            int sc = 0;
-            if (day < dayCount){
-                sc = getScore(lib, day);
-                solution.add(lib);
-                booksIDD.add(solutionBooks);
+                day += lib.signupTime;
+                int sc = 0;
+                if (day < dayCount) {
+                    sc = getScore(lib, day);
+                    solution.add(lib);
+                    booksIDD.add(solutionBooks);
+
+                }
+                score += sc;
+                //System.out.println("score for library " + sc + "\n");
+
+
+                libraries.remove(0);
+                if (libraries.size() > 0)
+                    Collections.sort(libraries);
+            }
+            //System.out.println("score " + score);
+
+            //System.out.prinln(solution.size());
+            System.out.println(solution.size());
+            StringBuilder builder = new StringBuilder();
+            builder.append(solution.size()).append("\n");
+            for (int i = 0; i < solution.size(); i++) {
+                builder.append(solution.get(i).id).append(" ").append(booksIDD.get(i).size()).append("\n");
+//            System.out.println(solution.get(i).id + " " + booksIDD.get(i).size());
+//            str += solution.get(i).id + " " + booksIDD.get(i).size()
+                for (int j = 0; j < booksIDD.get(i).size(); j++)
+                    builder.append(booksIDD.get(i).get(j)).append(" ");
+//                System.out.print(booksIDD.get(i).get(j) + " ");
+//            System.out.println();
+                builder.append("\n");
 
             }
-            score += sc;
-            //System.out.println("score for library " + sc + "\n");
-
-
-            libraries.remove(0);
-            if (libraries.size()>0)
-                Collections.sort(libraries);
+            this.writeAnswer(builder.toString());
         }
-        //System.out.println("score " + score);
 
-
-
-        //System.out.prinln(solution.size());
-        System.out.println(solution.size());
-        for (int i = 0;i<solution.size();i++){
-            System.out.println(solution.get(i).id + " " + booksIDD.get(i).size());
-            for (int j = 0;j<booksIDD.get(i).size();j++)
-                System.out.print(booksIDD.get(i).get(j) + " ");
-            System.out.println();
-        }
-    }
-
-
-    public void writeAnswer(List<LibraryAnswer> answers) {
-        StringBuilder result = new StringBuilder();
-        result.append(answers.size()).append("\n");
-
-        for (LibraryAnswer answer : answers) {
-            result.append(answer.toString()).append("\n");
-        }
+    public void writeAnswer(String result) {
+//        StringBuilder result = new StringBuilder();
+//        result.append(answers.size()).append("\n");
+//
+//        for (LibraryAnswer answer : answers) {
+//            result.append(answer.toString()).append("\n");
+//        }
 
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
-            writer.write(result.toString());
+            writer.write(result);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
     public int getScore (Library lib, int day){
         Collections.sort(lib.bookIds);
