@@ -99,24 +99,6 @@ public class Solution {
     }
 
 
-    public void writeAnswer(List<LibraryAnswer> answers) {
-        StringBuilder result = new StringBuilder();
-        result.append(answers.size()).append("\n");
-
-        for (LibraryAnswer answer : answers) {
-            result.append(answer.toString()).append("\n");
-        }
-
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
-            writer.write(result.toString());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     public int getScore (Library lib, int day){
         Collections.sort(lib.bookIds);
@@ -127,7 +109,7 @@ public class Solution {
             //System.out.println("day" + day);
             for (int i = 1;i<=lib.shipPerDay && j < lib.bookIds.size();i++){
                 if (lib.bookIds.get(j).score !=0){
-                    solutionBooks.add(j);
+                    solutionBooks.add(lib.bookIds.get(j).id);
                 }
                 score += lib.bookIds.get(j).score;
                 lib.bookIds.get(j).score = 0;
