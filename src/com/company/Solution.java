@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,44 +10,51 @@ public class Solution {
     public List<Book> books;
     public List<Library> libraries;
     public int dayCount;
+    private String outputName;
 
-    public Solution() {
-        Scanner scanner = new Scanner(System.in);
+    public Solution(String filename) {
+        File file = new File(filename);
+        this.outputName = filename.substring(0, filename.length() - 3);
 
-        // Get counts
-        int bookCount = scanner.nextInt();
-        int libraryCount = scanner.nextInt();
-        this.dayCount = scanner.nextInt();
+        Scanner scanner = null;
 
-        this.books = new ArrayList<>();
+        try {
+            scanner = new Scanner(file);
 
-        for (int i = 0; i < bookCount; i++) {
-            books.add(new Book(i, scanner.nextInt()));
-        }
+            // Get counts
+            int bookCount = scanner.nextInt();
+            int libraryCount = scanner.nextInt();
+            this.dayCount = scanner.nextInt();
 
-        this.libraries = new ArrayList<>();
+            this.books = new ArrayList<>();
 
-        for (int i = 0; i < libraryCount; ++i) {
-            int libraryBooks = scanner.nextInt();
-            int signupProcess = scanner.nextInt();
-            int shipPerDay = scanner.nextInt();
-
-            Library library = new Library(i, new HashMap<Integer, Book>(), signupProcess, shipPerDay);
-
-            for (int j = 0; j < libraryBooks; j++) {
-                int bookId = scanner.nextInt();
-                library.addBook(books.get(bookId)); // add book to current library
-                books.get(bookId).addLibrary(library); // add library book belongs to
+            for (int i = 0; i < bookCount; i++) {
+                books.add(new Book(i, scanner.nextInt()));
             }
 
-            libraries.add(library);
-        }
+            this.libraries = new ArrayList<>();
 
-        System.out.println(libraries);
-        System.out.println(books);
+            for (int i = 0; i < libraryCount; ++i) {
+                int libraryBooks = scanner.nextInt();
+                int signupProcess = scanner.nextInt();
+                int shipPerDay = scanner.nextInt();
+
+                Library library = new Library(i, new HashMap<Integer, Book>(), signupProcess, shipPerDay);
+
+                for (int j = 0; j < libraryBooks; j++) {
+                    int bookId = scanner.nextInt();
+                    library.addBook(books.get(bookId)); // add book to current library
+                    books.get(bookId).addLibrary(library); // add library book belongs to
+                }
+
+                libraries.add(library);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getAnswer(List<LibraryAnswer> answers) {
+    public void writeAnswer(List<LibraryAnswer> answers) {
         StringBuilder result = new StringBuilder();
         result.append(answers.size()).append("\n");
 
@@ -54,7 +62,16 @@ public class Solution {
             result.append(answer.toString()).append("\n");
         }
 
-        return result.toString();
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("output/" + outputName + ".txt"));
+            writer.write(result.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void solve() {
+        // ...
+        // Write herer (by writeAnswer)
+    }
 }
