@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Library {
-    private int id;
-    private HashMap<Integer, Book> bookIds;
-    private int signupTime;
-    private int shipPerDay;
+    public int id;
+    public HashMap<Integer, Book> bookIds;
+    public int signupTime;
+    public int shipPerDay;
 
     public Library(int id, HashMap<Integer, Book> bookIds, int signupTime, int shipPerDay) {
         this.id = id;
